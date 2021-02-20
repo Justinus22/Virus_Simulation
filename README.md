@@ -12,7 +12,7 @@ If you have any suggestions for improvement, you can massage me at: 'justin.beck
 
 I know the code is a bit messy but i am still learning a lot so i hope thats ok...
 
-The website should be soon avaible at the link: virsim.avh.hamburg
+The website should be soon avaible at the link: http://virsim.avh.hamburg/
 
 
 Have fun!
