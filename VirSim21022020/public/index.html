@@ -1,0 +1,986 @@
+<html>
+<head>
+	<title>Virus Simulation</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+	<div id='start'>
+		<h1 id='titel'>Virus Simulation</h1>
+		<div id='EinführungstextDIV'>
+			<p id='Einführungstext'>Herzlich Willkommen auf meiner Simulations-Website! <br><br>
+			Liebe/r Besucher/in,<br><br>
+			diese Virus-Simulation bietet dir die Möglichkeit, den Verlauf einer Pandemie nachzuvollziehen, selbst erfahrbar zu machen und leicht zu verstehen. <br>
+			Du kannst selbst Einstellungen vornehmen, z. B. die Anzahl der Menschen in deiner Simulation und verschiedene Parameter zu ihrem Verhalten. Für jeden Parameter gibt es eine Voreinstellung, die du beim Scrollen über das Feld näher erklärt bekommst und verändern kannst. Probiere es einfach aus und beobachte die farbig markierten Punkte nach Start der Simulation. Die Ergebniskurve gibt dir Auskunft über bekannte und unbekannte Infektionszahlen, die Genesung oder den Tod der Infizierten. <br>
+			Welche Maßnahmen (Einstellungen) führen zur Abflachung der Kurven? Wie kann die exponentielle Ausbreitung gestoppt werden? Welche Empfehlungen würdest du Virologen, Politikern und deinen Mitmenschen geben, um die Pandemie einzudämmen?<br><br>
+			Viel Erfolg!
+			</p>
+		</div>
+	</div>
+<body>
+<br/> 
+<table id='InputTable'>
+<tr >
+	<th title="Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0">
+			<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0'>Simulationsgeschwindigkeit: </span>
+	</th>
+	<th title="Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0">
+		<input type="number" id="Simspeed" min='0' value="0" >
+	</th>
+	<th title="Hier kannst du den Sicherheitsabstand einstellen, der nötig ist um sich nicht mehr zu infizieren (im echten Leben 1,5m). Standard = 10">
+		<span class="tooltip" data-tooltip= 'Hier kannst du den Radius einstellen, bis zu dem Menschen sich wahrscheinlich infizieren (im echten Leben 1,5m). Standard = 2.5'>
+		soziale Distanz:</span>
+	</th>
+	<th title="Hier kannst du den Sicherheitsabstand einstellen, der nötig ist um sich nicht mehr zu infizieren (im echten Leben 1,5m). Standard = 10"> 
+		<input type="number" id="socialDistance" min='0' value="10">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100">
+			<span class="tooltip" data-tooltip= 'Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100'>Anzahl Lebewesen:</span>
+	</th>
+	<th title="Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100"> 
+		<input type="number" id="Livings" min='0' value="100">
+	</th>
+	<th title="Hier kannst du die Zeit einstellen, die es braucht, bis Lebewesen wieder gesund werden. Standard = 10000 (in Ticks)">
+		<span class="tooltip" data-tooltip= 'Hier kannst du die Zeit einstellen, die es maximal braucht bis Lebewesen wieder gesund werden. Standard = 5000 (in Ticks)'>maximale Zeit zur Erholung:</span>
+	</th>
+	<th title="Hier kannst du die Zeit einstellen, die es braucht, bis Lebewesen wieder gesund werden. Standard = 10000 (in Ticks)">
+		<input type="number" id="TTRe" min='0' value="10000">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 10">
+		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 15'>Laufdistanz:</span>
+	</th>
+	<th title="Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 15"> 
+		<input type="number" id="walkDistance" min='0' value="15">
+	</th>
+	<th title="Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1">
+		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1'>Anzahl Startinfizierte:</span>
+	</th >
+	<th title="Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1"> 
+		<input type="number" id="Startinfizierte" min='0' value="1"></th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" >
+		<span class="tooltip" data-tooltip= 'Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2'>Infektionswahrscheinlichkeit: </span>
+	</th>
+	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" > <input type="number" id="InfProb" min='0' value="2">
+	</th>
+	<th title="Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10" >
+		<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10'>Geschwindigkeit zum Supermarkt:</span>
+	</th>
+	<th title="Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10" > 
+		<input type="number" id="STM" min='0' value="10">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Geschwindigkeit einstellen, mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 100" >
+		<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 20'>Geschwindigkeit nach Hause:</span>
+	</th>
+	<th title="Hier kannst du die Geschwindigkeit einstellen, mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 100">
+		<input type="number" id="STH" min='0' value="100">
+	</th>
+	<th title="Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15" >
+		<span class="tooltip" data-tooltip= 'Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15'>Todeswahrscheinlichkeit:</span>
+	</th>
+	<th title="Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15" >
+		<input type="number" id="DeathCh" min='0' value="15">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du den maximalen Lebensmittelvorrat eines Lebewesens eingeben. Standard = 1000." >
+		<span class="tooltip" data-tooltip= 'Hier kannst du das maximale Essen, welches die Lebewesen haben können, einstellen. Standard = 1000.'>maximales Essen:</span>
+	</th>
+	<th title="Hier kannst du den maximalen Lebensmittelvorrat eines Lebewesens eingeben.  Standard = 1000." > 
+		<input type="number" id="MaxFood" min='0' value="1000">
+	</th>
+	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2" >
+		<span class="tooltip" data-tooltip= 'Hier kannst du das minimale Essen, welches die Lebewesen haben können, einstellen. Standard = 2'>minimales Essen:</span>
+	</th>
+	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2">
+		<input type="number" id="MinFood" min='0' value="2">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Wahrscheinlichkeit unbemerkter Infektionen in Prozent einstellen. Standard = 5">
+		unbekannte Infektionen:
+	</th>
+	<th title="Hier kannst du die Wahrscheinlichkeit unbemerkter Infektionen in Prozent einstellen. Standard = 5">
+		<input type="number" max="100" id="disInf" value="5">
+	</th>
+	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
+		Einschränkungen bei Infektion:
+	</th>
+	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
+		<input type="number" id='inlimInfRa' value="2">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du einstellen, wie weich und organisch die Laufwege der Lebewesen sein sollen. Umso höher, je weicher, allerdings wird dabei auch die Bewegungsfreiheit mehr eingeschränkt. Standard = 80">
+		Laufdistanzteiler:
+	</th>
+	<th title="Hier kannst du einstellen, wie weich und organisch die Laufwege der Lebewesen sein sollen. Umso höher, je weicher, allerdings wird dabei auch die Bewegungsfreiheit mehr eingeschränkt. Standard = 80">
+		<input type="numbe" id='walkDisdiv' value="80">
+	</th>
+	<th title="Hier kannst du die Grenze in px einstellen, ab der die Kontaktvermeidungskraft wirkt. Standard = 10">
+		Achtsamskeitgrenze:		
+	</th>
+	<th itle="Hier kannst du die Grenze in px einstellen, ab der die Kontaktvermeidungskraft wirkt. Standard = 10">
+		<input type="number" value="10" id="mdflsBrd">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du maximale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 10">
+		maximale Achtsamkeit:
+	</th>
+	<th title="Hier kannst du maximale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 10">
+		<input type="number" value="10" id="maxmdfls">
+	</th>
+	<th title="Hier kannst du minmale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 0">
+		minimale Achtsamkeit:
+	</th>
+	<th title="Hier kannst du minmale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 0">
+		<input type="number" value="0" id="minmdfls">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die minimale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 1">
+		minimale Immunsystemstärke:
+	</th>
+	<th title="Hier kannst du die minimale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 1">
+		<input type="number" value="1" id="minimsys">
+	</th>
+	<th title="Hier kannst du die maximale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 100">
+		maximale Immunsystemstärke:
+	</th>
+	<th title="Hier kannst du die maximale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 100"> 
+		<input type="number" value="100" id="maximsys">
+	</th>
+</tr>
+<tr>
+	<th title="Bestimmt, wie viel Abstand im Arlarmzustand eingehalten wird. Standard = 1">
+		Stufe Kontaktvermeidung:
+	</th>
+	<th title="Bestimmt, wie viel Abstand im Arlarmzustand eingehalten wird. Standard = 1">
+		<input type="number" value="1" id="phawyF">
+	</th>
+	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
+		Grenze zum Alarm:
+	</th>
+	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
+		<input type="number" value="20" id="BrdtoArlt">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du einstellen, ob es einen Supermarkt geben soll. Standard = On">
+		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen ob es einen Supermarkt geben soll. Standard = On'>Supermarkt:</span>
+	</th>
+	<th title="Hier kannst du einstellen, ob es einen Supermarkt geben soll. Standard = On">
+		<input type="checkbox" id="MarketYN" min='0' checked >
+	</th>
+	<th title="Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off">
+		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off'>Live Graph:</span>
+	</th>
+	<th title="Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off"> 
+		<input type="checkbox" id="liveGrph" min='0' value="false">
+	</th>
+</tr>
+<tr>
+	<th title="">
+		Achtsamkeit(y/n?):
+	</th>
+	<th title="">
+		<input type="checkbox" checked id='mindfulnessYN'>
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Farbe von Infizierten einstellen.">
+		Farbe der Infizierten:
+	</th>
+	<th title="Hier kannst du die Farbe von Infizierten einstellen.">
+		<input type="color" id="ColorInf" value="#ff0000">
+	</th>
+	<th title="Hier kannst du die Farbe von noch nicht Infizierten einstellen." >
+		Farbe der noch nicht Infizierten:
+	</th>
+	<th title="Hier kannst du die Farbe von noch nicht Infizierten einstellen.">
+		<input type="color" id="ColorCl" value='#ffffff'>
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Farbe von Genesenen einstellen.">
+		Farbe von Erholten:
+	</th>
+	<th title="Hier kannst du die Farbe von Genesenen einstellen.">
+		<input type="color" id="ColorRe" value="#2b44ff">
+	</th>
+	<th title="Hier kannst du die Farbe der Toten einstellen.">
+		Farbe der Toten:
+	</th>
+	<th title="Hier kannst du die Farbe der Toten einstellen.">
+		<input type="color" id="ColorDth" value="#00a621">
+	</th>
+</tr>
+<tr>
+	<th title="Hier kannst du die Farbe von unbemerkt Infizierten einstellen.">
+		Farbe der unbemerkt Infizierten:
+	</th>
+	<th title="Hier kannst du die Farbe von unbemerkt Infizierten einstellen.">
+		<input type="color" id="ColorUSF" value="#fce803">
+	</th>
+</tr>
+</table>
+<br><br>
+<table id="inputs">
+<tr>
+<th title="Hier kannst du die Simulation starten.">
+	<span class='tooltip' data-tooltip='Hier kannst du die Simulation starten.'>
+		<input type="button" onclick="StartSim()"  value='Starte Simulation' name="StartSim">
+	</span> 
+</th>
+<th title="Hier kannst du die Simulation stoppen.">
+	<span class='tooltip' data-tooltip='Hier kannst du die Simulation stoppen.' >
+		<input type="button" onclick="cancelSim()"  value='Stoppe Simulation' name="StoppeSim">
+	</span>
+</th>
+</tr>
+</table>
+<br>
+</div>
+<canvas id='SimulationsCanvas' width="600", height="600" ></canvas><br/>
+<br>
+<form>
+	<div id='saveSimDiv'>
+		<input type="button" value="Download starten" onclick="OnDownloadFile()" id='saveSim'>
+    </div>
+</form>
+<div id=repz class='text'>
+	<p >Insgesamte Infektionzahl: <span class="text" id='reproduktion'></span></p>
+</div>
+<canvas id='resultCanvas' width="600", height="600"></canvas>
+<div id='end'>
+<div id='inend'>
+	<br><br>
+	<a href="databaseAcsess.html" class='text'>Sieh dir hier die Ergebnisse deiner letzten Simulationen an!</a>
+	<br><br>
+	<br><br>
+	<a href="JufoDokumentation.html" class='text' target="_blank">Meine aktuelle Dokumentaton gibt es hier</a>
+
+	<br><br>
+	<p>
+		Impressum:<br><br>
+		Justin Becker<br>
+		Kontakt: justin.becker@avh.hamburg<br>
+
+	</p>
+</div>
+</div>
+<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
+<script>
+
+//Inputs
+var SimSpeed = 1000;
+var socialDistance = 5;
+var Livings = 100;
+var TTRe = 1500;
+var walkDistance = 10;
+var StartInfizerite = 1;
+var InfProb = 2;
+var STM = 10;
+var STH = 20;
+var MaxFood = 1000;
+var MinFood = 2;
+var MarketYN = true
+var liveGrph = false
+var DeathCh = 15
+var discoverInf = 100 - 5;
+var limInfRa = 1;
+var walkDistancedivder = 100;
+var MaxMindfulness = 5;
+var MinMindfulness = 1;
+var mindfulnessBorder = 50;
+var pushawayforce = 10;
+var BordertoAlertMode = 20;
+var InputBrdtoArlt = true;
+
+
+//heilmittle     not in sim yet 
+medecineProgress = 1
+medecineProgressSpeed = 0.0001
+medecineProgressYN = false
+
+
+// Inputs refrence
+var InputSimSpeed = document.getElementById('Simspeed');
+var InputsocialDistance = document.getElementById('socialDistance');
+var InputLivings = document.getElementById('Livings');
+var InputTTRe = document.getElementById('TTRe');
+var InputwalkDistance = document.getElementById('walkDistance');
+var InputStartInfizerite = document.getElementById('Startinfizierte');
+var InputInfProb = document.getElementById('InfProb');
+var InputSTM = document.getElementById('STM');
+var InputSTH = document.getElementById('STH');
+var InputMaxFood = document.getElementById('MaxFood')
+var InputMinFood = document.getElementById('MinFood');
+var InputMarketYN = document.getElementById('MarketYN')
+var InputliveGrph = document.getElementById('liveGrph')
+var InputDeathCh = document.getElementById('DeathCh');
+var InputdiscoverInf = document.getElementById('disInf');
+var InputlimInfRa = document.getElementById('inlimInfRa');
+var InputwalkDisdiv = document.getElementById('walkDisdiv');
+var InputmdflsBrd = document.getElementById('mdflsBrd');
+var Inputmaxmdfls = document.getElementById('maxmdfls');
+var Inputminmdfls = document.getElementById('minmdfls');
+var Inputminimsys = document.getElementById('minimsys');
+var Inputmaximsys = document.getElementById('maximsys')
+var InputphawyF = document.getElementById('phawyF')
+var InputBrdtoArlt = document.getElementById('BrdtoArlt');
+var InputmindfulnessYN = document.getElementById('mindfulnessYN')
+var OutputReproduktion = document.getElementById('reproduktion')
+
+
+//Get Color
+var InputColorInf = document.getElementById('ColorInf');
+var InputColorRe = document.getElementById('ColorRe');
+var InputColorDth = document.getElementById('ColorDth');
+var InputColorCl = document.getElementById('ColorCl');
+var InputColorUSF = document.getElementById('ColorUSF')
+
+
+// Colors for Dots
+var ColorInfektions = '#ff0000';
+var ColorClean = '#ffffff';
+var ColorDeath = '#00a621';
+var ColoRecovers = '#2b44ff';
+var ColorUnSeeInf = '#fce803';
+
+
+//Objectarrays
+var Dots = new Array();
+var Markets = new Array();
+
+
+//InfektionData
+var Reproduktion = 0;
+var overallInfektions = 0;
+var redCount = StartInfizerite;
+var time = 0;
+var reover = 0;
+var death = 0
+var usf = 0;
+
+
+//InfektionData Progresscount
+var Times = [0];
+var Infektions = [1];
+var Recovres = [];
+var markets = [];
+var Deaths = [];
+var UnSeInfs = [];
+var Reproduktions = []
+
+
+//Overall Control
+var inSimulation = false;
+var createchar = false;
+var wereRestrictions = false
+
+
+
+//Consts
+var InDic = Math.sqrt(socialDistance**2+socialDistance**2)
+var resultCan = document.getElementById('resultCanvas').getContext('2d')
+
+
+//Chart
+Chart.defaults.global.defaultFontColor = "black";
+Chart.defaults.global.defaultFontSize = 13;
+const result = new Chart(resultCan, 
+				{
+type: 'line',
+
+    data: {
+        labels: Times,
+        datasets: [{
+            label: 'Infektionen',
+            borderColor: ColorInfektions,
+            data: Infektions,
+            pointRadius: 0,
+            pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'Genesene',
+            borderColor: ColoRecovers,
+        	data: Recovres,
+        	pointRadius: 0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'Tote',
+        	borderColor: ColorDeath,
+        	data: Deaths,
+        	pointRadius:0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'unbekannte Infektionen',
+        	borderColor: ColorUnSeeInf,
+        	data: UnSeInfs,
+        	pointRadius:0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }]
+    },
+
+options: {
+	
+	responsiveAnimationDuration: 0,	
+	responsive: false,
+	maintainAspectRatio: false,
+	
+	scales: {
+		yAxes: [{
+            ticks: {
+                max: 100,
+                min: 0,
+                stepSize: 10
+            }
+        }]
+		},
+
+	elements: {
+        line: {
+            tension: 0 
+        },
+        points: {
+        	radius: 0
+        },    
+        legend: {
+            labels: {
+                fontColor: 'black'
+            	}
+        	}
+    	},
+    	events: [],
+    	bezierCurve : true
+}
+});
+Chart.defaults.global.tooltips.enabled = false;
+
+
+window.onload = async function(){
+	console.log('ready')
+	canvas = document.getElementById('SimulationsCanvas');
+	canvasContext  = canvas.getContext('2d');
+	resultCan = document.getElementById('resultCanvas').getContext('2d')
+	var draw = setInterval(function(){
+		if (!inSimulation){
+		colorRect(0,0,canvas.width,canvas.height,'black')
+
+
+		}
+	});
+}
+const StartSim = function() {
+	if(!inSimulation){
+	inSimulation = true;
+
+	//Object lists
+	Dots = [];
+	Markets =[];
+
+	//Get input values
+	SimSpeed = InputSimSpeed.value;
+	socialDistance = InputsocialDistance.value;
+	Livings = InputLivings.value;
+	TTRe = InputTTRe.value;
+	walkDistance = InputwalkDistance.value;
+	StartInfizerite = InputStartInfizerite.value;
+	InfProb = InputInfProb.value;
+	STM = InputSTM.value;
+	STH = InputSTH.value;
+	MaxFood = InputMaxFood.value;
+	MinFood = InputMinFood.value;
+	MarketYN = InputMarketYN.checked;
+	liveGrph = InputliveGrph.checked
+	DeathCh = InputDeathCh.value;
+	limInfRa = InputlimInfRa.value;
+	discoverInf = 100 - InputdiscoverInf.value; //get Revers value
+	walkDistancedivder = InputwalkDisdiv.value;
+	MaxMindfulness = Inputmaxmdfls.value;
+	MinMindfulness = Inputminmdfls.value;
+	mindfulnessBorder = InputmdflsBrd.value;
+	ImmunsystemMin = Inputminimsys.value;
+	ImmunsystemMax = Inputmaximsys.value;
+	pushawayforce = InputphawyF.value;
+	BordertoAlertMode = InputBrdtoArlt.value;
+	mindfulnessYN = InputmindfulnessYN.checked;
+	noRestrictionsAnymore = 20 
+	
+	// Get Colors
+ 	ColorInfektions = InputColorInf.value;
+	ColorClean = InputColorCl.value;
+	ColorDeath = InputColorDth.value;
+	ColoRecovers = InputColorRe.value;
+	ColorUnSeeInf = InputColorUSF.value;
+
+
+	//Reset Data
+	redCount = StartInfizerite;
+	death = 0;
+	reover = 0;
+	usf = 0;
+	Reproduktion = 0;
+	time = 0;
+	
+	//Sim Control
+	onenewinfected = false;
+
+	//Reset Lists
+	Times = [0];
+	console.log(Times)
+	Infektions = [redCount];
+	Recovres = [];
+	markets = [];
+	Deaths = [];
+	UnSeInfs = [];
+	Reproduktions = [];
+	result.data.datasets[3].data = UnSeInfs
+	result.data.datasets[2].data = Deaths
+	result.data.datasets[1].data = Recovres
+	result.data.datasets[0].data = Infektions
+	result.data.labels = Times
+	
+	//Handel Live Graph
+	if (liveGrph && createchar){
+		createChart()
+		createchar = false;
+	}
+	//Init uninf Points
+	for(var i = 0; i < Livings - StartInfizerite; i++){
+		x = Math.random() * canvas.width
+		y = Math.random() * canvas.height
+		f = Math.random() * MaxFood
+		im = getRndFloat(ImmunsystemMin,ImmunsystemMax) // Immunsystem vom Benutzer einstellbar machen!!!
+		mfn = getRndFloat(MinMindfulness, MaxMindfulness)
+		console.log(im)
+		Dots.splice(i, 0, new Dot(x,y, ColorClean, f, x,y, im, mfn))
+	}
+	//Init inf Points
+	for(var i = 0; i < StartInfizerite; i++){
+		x = Math.random() * canvas.width
+		y = Math.random() * canvas.height
+		f = Math.random() * MaxFood
+		im = getRndFloat(ImmunsystemMin,ImmunsystemMax) 
+		mfn = getRndFloat(MinMindfulness, MaxMindfulness)
+		console.log(im)
+		Dots.splice(i, 0, new Dot(x,y, ColorInfektions, f, x,y, im, mfn))
+	}
+	//Init Marketplace
+	if (MarketYN){
+		Markets.push(new Market(canvas.width/2, canvas.height/2))
+	}
+
+	//Main Sim
+	var framesPerSecond = SimSpeed;
+	var main = setInterval(function(){
+		if(inSimulation){
+			
+			colorRect(0,0,canvas.width,canvas.height,'black')
+	 		time++;
+	 		var allnewInfektionsday = redCount;
+
+
+			//Update Position and Status of all points
+	 		for(var dot in Dots){
+
+				// Handel Food count
+	 			if(MarketYN){Dots[dot].food -= 1;}
+				
+				//update Points
+	 			Dots[dot].pick_Dir()
+	 			Dots[dot].InfTime()
+	 			Dots[dot].MarketCheck()
+	 			
+				//Compare points with each other
+				for(var d in Dots){
+					//calculate Distance between points
+					var a = Dots[dot].x - Dots[d].x;
+					var b = Dots[dot].y - Dots[d].y;
+					var c = Math.sqrt(a**2 + b**2);
+					
+					//Check if Points are too close to each other
+					if (c < InDic){
+						line(Dots[d].x,Dots[d].y,Dots[dot].x,Dots[dot].y)
+						var r = getRndInteger(0,InfProb)
+						//check if infection can be done 
+						if((Dots[d].color == ColorInfektions || Dots[d].color == ColorUnSeeInf) && r == 0 && Dots[dot].color == ColorClean && Dots[dot].immunsys <= discoverInf) {
+							//infect Point
+							Dots[dot].color = ColorInfektions;
+							//update Infections Count
+							redCount++;
+							onenewinfected = true;
+							Dots[d].reproduktion += 1;
+						}else if ((Dots[d].color == ColorInfektions || Dots[d].color == ColorUnSeeInf) && r == 0 && Dots[dot].color == ColorClean && Dots[dot].immunsys > discoverInf){ 
+							// infect Point 
+							Dots[dot].color = ColorUnSeeInf;
+							//update Infection Count
+							usf++;
+							onenewinfected = true;
+							Dots[d].reproduktion += 1;
+						}
+					}
+					//Handel Lockdown/ Special alarm Situation 
+					if(redCount >= BordertoAlertMode || (wereRestrictions && redCount >= noRestrictionsAnymore)){
+						if(c <= mindfulnessBorder && c != 0 &&  mindfulnessYN && Dots[dot].food > MinFood) {
+							wereRestrictions = true
+							//console.log(wereRestrictions)
+							//apply force for safety distance
+							Dots[dot].x += (1/c) * a/c * pushawayforce * ((Dots[dot].mindfulness * Dots[d].mindfulness))
+							Dots[dot].y += (1/c) * b/c * pushawayforce * ((Dots[dot].mindfulness * Dots[d].mindfulness))
+						} 
+
+					} else {
+							wereRestrictions = false
+					}
+
+				}
+				//update Dots position on Screen
+				Dots[dot].draw()
+
+			}
+
+			//console.log(allnewInfektionsday, redCount)
+			//Print current Inf Count
+			if(onenewinfected){
+			Reproduktion =  (redCount) / (allnewInfektionsday) 
+			OutputReproduktion.textContent = redCount; 
+			onenewinfected = false;
+			}
+			
+			//draw Market
+			for(var m in Markets){
+				Markets[m].draw()
+			}
+			
+			//update Infection Lists for Graph
+			Times.push(time)
+			Infektions.push(redCount);
+			Recovres.push(reover);
+			Deaths.push(death);
+			UnSeInfs.push(usf);
+			Reproduktions.push(Reproduktion)
+
+				
+			//Handel Live Graph if activated
+			if(liveGrph){
+			// // result.data.datasets[3].data.push(usf)
+			// // result.data.datasets[2].data.push(death)
+			// // result.data.datasets[1].data.push(reover)
+			// // result.data.datasets[0].data.push(redCount)
+			// // result.data.labels.push(time);
+			// console.log('tset')
+				result.update()
+			}
+
+
+			// } else {
+			// 	Times.push(time)
+			// 	Infektions.push(redCount);
+			// 	Recovres.push(reover);
+			// 	Deaths.push(death);
+			// 	UnSeInfs.push(usf);
+
+			// }
+			}
+
+			//End Simulation
+			if(redCount <= 0 || !inSimulation){
+				// result.clear();
+				
+				//Send Data to the Server to save it there
+				sendData({
+					times: Times,
+					infektions:Infektions,
+					recovres:Recovres,
+					deaths: Deaths,
+					unseunfs: UnSeInfs,
+					reproduktions: Reproduktions,
+					options: {
+					simspeed: Simspeed,
+					socialdistance: socialDistance,
+					livings: Livings,
+					ttre: TTRe,
+					walkdistance: walkDistance,
+					startinfizierte: StartInfizerite,
+					infprob: InfProb,
+					stm: STM,
+					sth: STH,
+					maxfood: MaxFood,
+					minfood: MinFood,
+					marketyn: MarketYN,
+					livegraph: liveGrph,
+					deathch: DeathCh,
+					liminfra: limInfRa,
+					discoverinf: discoverInf,
+					walkdistancedivider: walkDistancedivder,
+					maxmindfulness: MaxMindfulness,
+					minmindfulness: MinMindfulness,
+					mindfullnesborder: mindfulnessBorder,
+					pushawayforce: pushawayforce,
+					bordertoalertmode: BordertoAlertMode,
+					mindfulnessyn: mindfulnessYN
+
+					}
+					});
+				alert('Simulation fertig!')
+				//draw Chart of Results
+				result.destroy()
+				createChart(Livings);
+				createchar = true;
+				//End Sim main Loop
+				cancelSim()		
+				clearInterval(main);	
+			}
+	}, 1000/framesPerSecond);	
+} else {
+	//handel twice Start of Sim
+	alert('Du befindest dich bereits in einer Simulation')
+}
+}
+//Send Data to Server
+async function sendData(datas) {
+	const data = datas;
+	const options = {
+		method: 'POST',	
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	} 
+	const response = await fetch('/api', options)
+	const json = await response.json();
+	console.log(json);
+	}
+//end Simulation
+function cancelSim(){
+	inSimulation = false;
+}
+// Create new Chart in the Result Canvas
+function createChart(Livings){
+	var stSzLv = (Livings/10);
+	const result = new Chart(resultCan, 
+					{
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: Times,
+        datasets: [{
+            label: 'Infektionen',
+            borderColor: ColorInfektions,
+            data: Infektions,
+            pointRadius: 0,
+            pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'Genesene',
+            borderColor: ColoRecovers,
+        	data: Recovres,
+        	pointRadius: 0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        	}, {
+        	label: 'Tote',
+        	borderColor: ColorDeath,
+        	data: Deaths,
+        	pointRadius: 0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'ungebekannte Infektionen',
+        	borderColor: ColorUnSeeInf,
+        	data: UnSeInfs,
+        	pointRadius: 0 ,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+		
+	responsive: false,
+	maintainAspectRatio: false,
+	responsiveAnimationDuration: 0,	
+	
+		
+	scales: {
+		yAxes: [{
+            ticks: {
+                max: parseInt(Livings),
+                min: 0,
+                stepSize: parseInt(stSzLv),
+            }
+        }]
+		},
+	elements: {
+        line: {
+            tension: 0 // disables bezier curves
+        },
+        points: {
+        	radius: 0
+        },    
+        legend: {
+            labels: {
+                fontColor: 'black'
+            	}
+        	}
+    	},
+
+        events: [],
+        bezierCurve : true
+    	
+}
+});
+
+}
+// draw Rect
+function colorRect(leftX,topY, width, height,drawColor){
+	canvasContext.fillStyle = drawColor;
+	canvasContext.fillRect(leftX,topY,width, height);
+}
+
+//draws Line
+function line(x1,y1,x2,y2){
+	canvasContext.beginPath();
+	canvasContext.moveTo(x1, y1);
+	canvasContext.lineTo(x2, y1);
+	canvasContext.stroke();
+}
+// gets a Random whole Int between min and max
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+// gets a float between min and max
+function getRndFloat(min, max) {
+
+	var returnVar = 0;
+	returnVar = Number(Math.random()) * (Number(max) - Number(min)) + Number(min);
+  return returnVar;
+}
+// draws circle/point
+function colorCircle(x,y,r,color){
+	canvasContext.fillStyle = color;
+	canvasContext.beginPath()
+	canvasContext.arc(x,y,r,0, Math.PI*2,true);
+	canvasContext.fill()
+}
+// class of one dot/living in the sim
+class Dot {
+	constructor(x,y, color,food, lx,ly, immunsys, mindfulness){
+		this.x = x
+		this.y = y
+		this.x_vel = 0;
+		this.y_vel = 0;
+		this.lx = lx
+		this.ly = ly
+		this.color = color
+		this.it = 0
+		this.food = food
+		this.immunsys = immunsys
+		this.mindfulness = mindfulness
+		this.reproduktion = 0;
+	}
+	draw(){ //updates point postion of screen
+
+		if(this.x - 3 <= 0){
+			this.x = 3
+			this.x_vel =0;
+		} else if(this.x + 3 >= canvas.width){
+			this.x = canvas.width -3;
+			this.x_vel = 0;
+		} 
+		if(this.y - 3 <= 0){
+			this.y = 3
+			this.y_vel = 0;
+		} else if(this.y + 3 >= canvas.height){
+			this.y = canvas.height-3
+			this.y_vel = 0;
+		} 
+
+		
+		colorCircle(this.x,this.y,3,this.color)	
+
+	}
+
+	pick_Dir() //updates point direction, in which it will go
+	{	
+	if ((this.food >= MinFood  || this.color == ColorInfektions) && !(this.color == ColorDeath))
+		{
+		if(!(this.color == ColorInfektions)){
+				this.x_vel += getRndInteger((-walkDistance - this.x_vel), (walkDistance - this.x_vel))/walkDistancedivder; // update x vel while not infected/ unsee infected
+				this.y_vel += getRndInteger((-walkDistance - this.y_vel), (walkDistance - this.y_vel))/walkDistancedivder; // update y vel while not infected/ unsee infected
+		}else{
+				this.x_vel += getRndInteger((-walkDistance - this.x_vel), (walkDistance - this.x_vel))/(walkDistancedivder * limInfRa)  // update x vel while infected
+				this.y_vel += getRndInteger((-walkDistance - this.y_vel), (walkDistance - this.y_vel ))/(walkDistancedivder * limInfRa)	// update y vel while infected
+		
+		}
+
+		this.x += this.x_vel; // updates x position 
+		this.y += this.y_vel; // updates y position 
+		}
+	} 
+	InfTime() // handels point Infections Status 
+	{
+		// if(this.color == ColorInfektions){this.food = MaxFood;}
+		if (this.color == ColorInfektions || this.color == ColorUnSeeInf)
+		{
+			this.it += 1 //counts already infected time
+
+			//console.log((TTRe * (15/this.immunsys)), this.immunsys, TTRe)
+			if (this.it >= (TTRe * (10/this.immunsys))  && (this.color == ColorInfektions || this.color == ColorUnSeeInf)  && this.immunsys > DeathCh){ //waits till point get unefectetd
+				this.color = ColoRecovers //update point as unefected
+				redCount--
+				reover++
+				onenewinfected = true;
+
+			} else if (this.it >= (TTRe * (10 /this.immunsys)) && this.color == ColorInfektions && this.immunsys <= DeathCh){
+				this.color = ColorDeath // updates point as dead
+				redCount--
+				death++
+				onenewinfected = true;
+		}
+	}
+}
+	MarketCheck() // Checks if point has to go to market an let point go to market
+	{
+		if((this.food >= MinFood || this.color == ColorInfektions) && this.color != ColorDeath){
+			this.x -= (this.x - this.lx)/STH //applys force on x axes for point to stay home
+			this.y -= (this.y - this.ly)/STH //applys force on y axes for point to stay home
+		}
+		for(var m in Markets){
+			if(Math.sqrt((this.x - Markets[m].x)**2 + (this.y - Markets[m].y)**2) < Math.sqrt(5**2 + 5**2)){
+				this.food = MaxFood //refills food
+				
+			} else if(Math.sqrt((this.x - Markets[m].x)**2 + (this.y - Markets[m].y)**2) > Math.sqrt(5**2 + 5**2) && this.food < MinFood && this.color != ColorDeath && this.color != ColorInfektions){
+				this.x -= (this.x - Markets[m].x)/STM //let point go to market an x axes
+				this.y -= (this.y - Markets[m].y)/STM //let point go to market an y axes
+			}
+		}
+	}
+	makemedicineProgress()
+	{
+		//must still be build, need ideas how to make this
+	}
+
+}
+
+class Market {
+	constructor(x,y){
+		this.x = x
+		this.y = y
+	}
+
+	draw(){ // draws Market
+
+		colorRect(this.x, this.y, 10, 10 , 'HotPink')
+	}
+
+}
+</script>
+</body>
+</html>
