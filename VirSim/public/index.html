@@ -230,8 +230,20 @@
 	</th>
 </tr>
 </table>
+<br>
+<button onclick="toogleExpertMode()" class='inputs'>Erweiterte Funktionen</button>
+<br>
+<div id='expertMode'>
+<table>
+	<th>
+		<tr>
+			Test 
+		</tr>
+	</th>
+</table>
+</div>
 <br><br>
-<table id="inputs">
+<table class="inputs">
 <tr>
 <th title="Hier kannst du die Simulation starten.">
 	<span class='tooltip' data-tooltip='Hier kannst du die Simulation starten.'>
@@ -247,6 +259,7 @@
 </table>
 <br>
 </div>
+
 <canvas id='SimulationsCanvas' width="600", height="600" ></canvas><br/>
 <br>
 <form>
@@ -338,7 +351,8 @@ var InputBrdtoArlt = document.getElementById('BrdtoArlt');
 var InputmindfulnessYN = document.getElementById('mindfulnessYN')
 var OutputReproduktion = document.getElementById('reproduktion')
 
-
+//Expert Mode Button
+var expMode = document.getElementById('expertMode');
 //Get Color
 var InputColorInf = document.getElementById('ColorInf');
 var InputColorRe = document.getElementById('ColorRe');
@@ -762,6 +776,13 @@ async function sendData(datas) {
 function cancelSim(){
 	inSimulation = false;
 }
+function toogleExpertMode(){
+	if (expMode.style.display === "none") {
+    expMode.style.display = "block";
+  } else {
+    expMode.style.display = "none";
+  }
+}
 // Create new Chart in the Result Canvas
 function createChart(Livings){
 	var stSzLv = (Livings/10);
@@ -836,6 +857,8 @@ function createChart(Livings){
     	
 }
 });
+
+
 
 }
 // draw Rect
@@ -984,3 +1007,4 @@ class Market {
 </script>
 </body>
 </html>
+
