@@ -43,18 +43,29 @@ body {
 	text-transform: capitalize;
 	font-size: 50px;
 }
+<<<<<<< HEAD
 .InputTable {
+=======
+#InputTable {
+>>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	position: relative;
 	text-transform: none;
 	text-align: left;
 	/* left: 30%; */
 	margin: auto;
 }
+<<<<<<< HEAD
 .inputs {
 	position: relative;
 	/* font-family: monospace; */
 	margin: auto;
 	background: transparent;
+=======
+#inputs {
+	position: relative;
+	/* font-family: monospace; */
+	margin: auto;
+>>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 }
 input{
 	background: transparent;
