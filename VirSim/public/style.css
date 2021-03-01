@@ -43,29 +43,19 @@ body {
 	text-transform: capitalize;
 	font-size: 50px;
 }
-
 .InputTable {
-=======
-#InputTable {
-
 	position: relative;
 	text-transform: none;
 	text-align: left;
 	/* left: 30%; */
 	margin: auto;
+	background: transparent;
 }
-
 .inputs {
 	position: relative;
 	/* font-family: monospace; */
 	margin: auto;
 	background: transparent;
-}
-#inputs {
-	position: relative;
-	/* font-family: monospace; */
-	margin: auto;
-
 }
 input{
 	background: transparent;
@@ -120,39 +110,3 @@ a:hover {
 	background-color: transparent;
 	text-decoration: underline;
 }
-
-/*a:active {
-	color: yellow;
-	background-color: transparent;
-	text-decoration: underline;
-}*/
-
-
-/*.tooltip::before, .tooltip::after {
-
-	--scale: 0;
-	--tooltip-color: rgb();
-	position: absolute;
-	
-	left: 50%;
-	top:-.25rem;
-	transform: translateX(-50%) translateY(-100%) scale(var(--scale));
-
-	transition: 100ms transform;
-	transform-origin: bottom center;
-
-}
-
-.tooltip::after {
-	content: attr(data-tooltip);
-	color: white;
-	padding: 0.5rem;
-	width: max-content;
-	background: var(--tooltip-color);
-	border-radius: 0.3rem;
-	text-align: center;
-}
-
-.tooltip:hover::before, .tooltip:hover::after{
-	--scale: 1;
-}*/
