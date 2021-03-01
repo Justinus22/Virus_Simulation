@@ -17,28 +17,16 @@
 	</div>
 <body>
 <br/> 
-<<<<<<< HEAD
 <table class='InputTable'>
 <tr >
 	<th title="Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0">
 			Simulationsgeschwindigkeit:
-=======
-<table id='InputTable'>
-<tr >
-	<th title="Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0">
-			<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0'>Simulationsgeschwindigkeit: </span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du die Geschwindigkeit in Bildern pro Sekunde einstellen. Wenn 0 = maximale Geschwindigkeit. Standard = 0">
 		<input type="number" id="Simspeed" min='0' value="0" >
 	</th>
 	<th title="Hier kannst du den Sicherheitsabstand einstellen, der nötig ist um sich nicht mehr zu infizieren (im echten Leben 1,5m). Standard = 10">
-<<<<<<< HEAD
 		soziale Distanz:
-=======
-		<span class="tooltip" data-tooltip= 'Hier kannst du den Radius einstellen, bis zu dem Menschen sich wahrscheinlich infizieren (im echten Leben 1,5m). Standard = 2.5'>
-		soziale Distanz:</span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du den Sicherheitsabstand einstellen, der nötig ist um sich nicht mehr zu infizieren (im echten Leben 1,5m). Standard = 10"> 
 		<input type="number" id="socialDistance" min='0' value="10">
@@ -46,21 +34,13 @@
 </tr>
 <tr>
 	<th title="Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100">
-<<<<<<< HEAD
 			Anzahl Lebewesen:
-=======
-			<span class="tooltip" data-tooltip= 'Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100'>Anzahl Lebewesen:</span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du die Anzahl der Lebewesen in der gesamten Simulation einstellen. Standard = 100"> 
 		<input type="number" id="Livings" min='0' value="100">
 	</th>
 	<th title="Hier kannst du die Zeit einstellen, die es braucht, bis Lebewesen wieder gesund werden. Standard = 10000 (in Ticks)">
-<<<<<<< HEAD
 		maximale Zeit zur Erholung:
-=======
-		<span class="tooltip" data-tooltip= 'Hier kannst du die Zeit einstellen, die es maximal braucht bis Lebewesen wieder gesund werden. Standard = 5000 (in Ticks)'>maximale Zeit zur Erholung:</span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du die Zeit einstellen, die es braucht, bis Lebewesen wieder gesund werden. Standard = 10000 (in Ticks)">
 		<input type="number" id="TTRe" min='0' value="10000">
@@ -68,85 +48,30 @@
 </tr>
 <tr>
 	<th title="Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 10">
-<<<<<<< HEAD
 		Laufdistanz:
 	<th title="Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 15"> 
 		<input type="number" id="walkDistance" min='0' value="15">
 	</th>
 	<th title="Hier kannst du die Geschwindigkeit einstellen, mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 100" >
 		Geschwindigkeit nach Hause:
-=======
-		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 15'>Laufdistanz:</span>
-	</th>
-	<th title="Hier kannst du einstellen, wie weit die Lebewesen maximal jeden Tick laufen können. Standard = 15"> 
-		<input type="number" id="walkDistance" min='0' value="15">
-	</th>
-	<th title="Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1">
-		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1'>Anzahl Startinfizierte:</span>
-	</th >
-	<th title="Hier kannst du einstellen, wie viele Infizierte es beim Start des Programms geben soll. Standard = 1"> 
-		<input type="number" id="Startinfizierte" min='0' value="1"></th>
-</tr>
-<tr>
-	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2'>Infektionswahrscheinlichkeit: </span>
-	</th>
-	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" > <input type="number" id="InfProb" min='0' value="2">
-	</th>
-	<th title="Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10'>Geschwindigkeit zum Supermarkt:</span>
-	</th>
-	<th title="Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen zum Supermarkt gehen. Standard = 10" > 
-		<input type="number" id="STM" min='0' value="10">
-	</th>
-</tr>
-<tr>
-	<th title="Hier kannst du die Geschwindigkeit einstellen, mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 100" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du die Geschwindigkeit einstellen mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 20'>Geschwindigkeit nach Hause:</span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du die Geschwindigkeit einstellen, mit der die Lebewesen vom Supermarkt nach Hause kommen. Standard = 100">
 		<input type="number" id="STH" min='0' value="100">
 	</th>
-<<<<<<< HEAD
 </tr>
 <tr>
 	<th title="Hier kannst du den maximalen Lebensmittelvorrat eines Lebewesens eingeben. Standard = 1000." >
 		maximales Essen:
-=======
-	<th title="Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15" >
-		<span class="tooltip" data-tooltip= 'Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15'>Todeswahrscheinlichkeit:</span>
-	</th>
-	<th title="Hier kannst die Todeswahrscheinlickeit nach einer Infektion in Prozent einstellen. Standard = 15" >
-		<input type="number" id="DeathCh" min='0' value="15">
-	</th>
-</tr>
-<tr>
-	<th title="Hier kannst du den maximalen Lebensmittelvorrat eines Lebewesens eingeben. Standard = 1000." >
-		<span class="tooltip" data-tooltip= 'Hier kannst du das maximale Essen, welches die Lebewesen haben können, einstellen. Standard = 1000.'>maximales Essen:</span>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du den maximalen Lebensmittelvorrat eines Lebewesens eingeben.  Standard = 1000." > 
 		<input type="number" id="MaxFood" min='0' value="1000">
 	</th>
-<<<<<<< HEAD
-=======
-	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du das minimale Essen, welches die Lebewesen haben können, einstellen. Standard = 2'>minimales Essen:</span>
-	</th>
-	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2">
-		<input type="number" id="MinFood" min='0' value="2">
-	</th>
-</tr>
-<tr>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	<th title="Hier kannst du die Wahrscheinlichkeit unbemerkter Infektionen in Prozent einstellen. Standard = 5">
 		unbekannte Infektionen:
 	</th>
 	<th title="Hier kannst du die Wahrscheinlichkeit unbemerkter Infektionen in Prozent einstellen. Standard = 5">
 		<input type="number" max="100" id="disInf" value="5">
 	</th>
-<<<<<<< HEAD
 </tr>
 <tr>
 	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
@@ -154,21 +79,6 @@
 	</th>
 	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
 		<input type="number" value="20" id="BrdtoArlt">
-=======
-	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
-		Einschränkungen bei Infektion:
-	</th>
-	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
-		<input type="number" id='inlimInfRa' value="2">
-	</th>
-</tr>
-<tr>
-	<th title="Hier kannst du einstellen, wie weich und organisch die Laufwege der Lebewesen sein sollen. Umso höher, je weicher, allerdings wird dabei auch die Bewegungsfreiheit mehr eingeschränkt. Standard = 80">
-		Laufdistanzteiler:
-	</th>
-	<th title="Hier kannst du einstellen, wie weich und organisch die Laufwege der Lebewesen sein sollen. Umso höher, je weicher, allerdings wird dabei auch die Bewegungsfreiheit mehr eingeschränkt. Standard = 80">
-		<input type="numbe" id='walkDisdiv' value="80">
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 	<th title="Hier kannst du die Grenze in px einstellen, ab der die Kontaktvermeidungskraft wirkt. Standard = 10">
 		Achtsamskeitgrenze:		
@@ -176,38 +86,7 @@
 	<th itle="Hier kannst du die Grenze in px einstellen, ab der die Kontaktvermeidungskraft wirkt. Standard = 10">
 		<input type="number" value="10" id="mdflsBrd">
 	</th>
-<<<<<<< HEAD
 	
-=======
-</tr>
-<tr>
-	<th title="Hier kannst du maximale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 10">
-		maximale Achtsamkeit:
-	</th>
-	<th title="Hier kannst du maximale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 10">
-		<input type="number" value="10" id="maxmdfls">
-	</th>
-	<th title="Hier kannst du minmale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 0">
-		minimale Achtsamkeit:
-	</th>
-	<th title="Hier kannst du minmale Achtsamkeit eines einzelnen Lebewesens einstellen. Die Achtsamkeit eines Lebewesen bestimmt, wie viel Abstand es zu anderen im Arlarmzustand einhält.  Standard = 0">
-		<input type="number" value="0" id="minmdfls">
-	</th>
-</tr>
-<tr>
-	<th title="Hier kannst du die minimale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 1">
-		minimale Immunsystemstärke:
-	</th>
-	<th title="Hier kannst du die minimale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 1">
-		<input type="number" value="1" id="minimsys">
-	</th>
-	<th title="Hier kannst du die maximale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 100">
-		maximale Immunsystemstärke:
-	</th>
-	<th title="Hier kannst du die maximale Immunsystemstärke eines einzelnen Lebewesen einstellen. Die Immunsystemstärke bestimmt, wie lange die Infektionsdauer ist und ob die Infektion unbemekrt bleibt. Standard = 100"> 
-		<input type="number" value="100" id="maximsys">
-	</th>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 </tr>
 <tr>
 	<th title="Bestimmt, wie viel Abstand im Arlarmzustand eingehalten wird. Standard = 1">
@@ -216,33 +95,11 @@
 	<th title="Bestimmt, wie viel Abstand im Arlarmzustand eingehalten wird. Standard = 1">
 		<input type="number" value="1" id="phawyF">
 	</th>
-<<<<<<< HEAD
 	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
 		Einschränkungen bei Infektion:
 	</th>
 	<th title='Hier kannst du den Divisor (Teiler) einstellen, um den die Laufweite eines Infizierten verkleinert wird. Standard = 2'>
 		<input type="number" id='inlimInfRa' value="2">
-=======
-	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
-		Grenze zum Alarm:
-	</th>
-	<th title="Nach Überschreitung dieser Infektionszahl wird ein Alarmzustand ausgelöst, der mit Einschränkungen einhergeht. Standard = 20">
-		<input type="number" value="20" id="BrdtoArlt">
-	</th>
-</tr>
-<tr>
-	<th title="Hier kannst du einstellen, ob es einen Supermarkt geben soll. Standard = On">
-		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen ob es einen Supermarkt geben soll. Standard = On'>Supermarkt:</span>
-	</th>
-	<th title="Hier kannst du einstellen, ob es einen Supermarkt geben soll. Standard = On">
-		<input type="checkbox" id="MarketYN" min='0' checked >
-	</th>
-	<th title="Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off">
-		<span class="tooltip" data-tooltip= 'Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off'>Live Graph:</span>
-	</th>
-	<th title="Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off"> 
-		<input type="checkbox" id="liveGrph" min='0' value="false">
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	</th>
 </tr>
 <tr>
@@ -293,7 +150,6 @@
 <br>
 <button onclick="toogleExpertMode()" class='inputs'>Erweiterte Funktionen</button>
 <br>
-<<<<<<< HEAD
 <br>
 <div id='expertMode'>
 <table class='InputTable'>
@@ -383,18 +239,6 @@
 </table>
 </div>
 <br>
-=======
-<div id='expertMode'>
-<table>
-	<th>
-		<tr>
-			Test 
-		</tr>
-	</th>
-</table>
-</div>
-<br><br>
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 <table class="inputs">
 <tr>
 <th title="Hier kannst du die Simulation starten.">
@@ -635,10 +479,7 @@ window.onload = async function(){
 	canvas = document.getElementById('SimulationsCanvas');
 	canvasContext  = canvas.getContext('2d');
 	resultCan = document.getElementById('resultCanvas').getContext('2d')
-<<<<<<< HEAD
 	toogleExpertMode()
-=======
->>>>>>> 5f55d07da4c50151bc3afa658931058944e0f912
 	var draw = setInterval(function(){
 		if (!inSimulation){
 		colorRect(0,0,canvas.width,canvas.height,'black')
