@@ -1,0 +1,147 @@
+body {
+	position: relative;
+	/*	left: 450px;*/
+	background-image: url('Background.jpg');
+	background-color: #19004f;
+	background-size: 1920px; 
+	background-attachment: fixed;
+	color:	black;
+	margin: auto;
+	width: 50%;
+	text-align: center;
+}
+
+#start {
+
+}
+#SimulationsCanvas {
+
+	position: relative;
+	width: 600px;
+	height: 600px;
+}
+
+#Einführungstext {
+	font-size: 20px;
+	text-align: justify;
+
+}
+#EinführungstextDIV {
+	width: 600px !important;
+	margin: auto;
+}
+#resultCanvas {
+	position: relative;
+	width: 600px !important;
+	height: 600px !important;
+	margin: auto;
+
+}
+
+#titel {
+	position: relative;
+	text-transform: capitalize;
+	font-size: 50px;
+}
+.InputTable {
+	position: relative;
+	text-transform: none;
+	text-align: left;
+	/* left: 30%; */
+	margin: auto;
+}
+.inputs {
+	position: relative;
+	/* font-family: monospace; */
+	margin: auto;
+	background: transparent;
+}
+input{
+	background: transparent;
+	font-size: 14px;
+}
+.text {
+	font-size: 18px !important;
+	text-align: left;
+}
+#saveSim{
+	text-align: left;
+}
+.p {
+
+	font-size: 12px;
+}
+#repz {
+	text-align:left;
+	margin: auto;
+	width:600px; /* or whatever width you want. */
+	max-width:600px; /* or whatever width you want. */
+	display: inline-block;
+}
+
+}
+#end {
+	text-align: left;
+	width:600px; /* or whatever width you want. */
+	max-width:600px; /* or whatever width you want. */
+	display: inline-block;
+}
+p {
+	position: relative;
+
+}
+a:link {
+	position: relative;
+
+	color: black;
+	background-color: transparent;
+	font-size: 20px;
+}
+
+a:visited {
+	color: black;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+/*a:active {
+	color: yellow;
+	background-color: transparent;
+	text-decoration: underline;
+}*/
+
+
+/*.tooltip::before, .tooltip::after {
+
+	--scale: 0;
+	--tooltip-color: rgb();
+	position: absolute;
+	
+	left: 50%;
+	top:-.25rem;
+	transform: translateX(-50%) translateY(-100%) scale(var(--scale));
+
+	transition: 100ms transform;
+	transform-origin: bottom center;
+
+}
+
+.tooltip::after {
+	content: attr(data-tooltip);
+	color: white;
+	padding: 0.5rem;
+	width: max-content;
+	background: var(--tooltip-color);
+	border-radius: 0.3rem;
+	text-align: center;
+}
+
+.tooltip:hover::before, .tooltip:hover::after{
+	--scale: 1;
+}*/
