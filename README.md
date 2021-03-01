@@ -2,7 +2,7 @@
 
 Welcome on my GitHub,
 
-because this is my first Repository, it may be a bit chaotic. 
+because this is my first was lolRepository, it may be a bit chaotic. 
 Therefore my code will be found in the 'master' branch. 
 
 This is made as a part of a school project and the competition 'Jugend forscht'. 
@@ -12,7 +12,7 @@ If you have any suggestions for improvement, you can massage me at: 'justin.beck
 
 I know the code is a bit messy but i am still learning a lot so i hope thats ok...
 
-The website should be soon avaible at the link: http://virsim.avh.hamburg/
+The website is avaible at the link: http://virsim.avh.hamburg/
 
 
 Have fun!
