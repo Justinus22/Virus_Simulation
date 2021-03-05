@@ -237,9 +237,16 @@
 		<input type="checkbox" id="liveGrph" min='0' value="false">
 	</th>
 </tr>
+</table>
+<table class='InputTable'>
 <tr>
 	<th>
-		<input type="file" class="InputTable" id="uploadDots" accept='.vrsm'>
+		<br>
+		<input type="file" id="uploadDots" accept='.vrsm' class="custom-file-input">
+	</th>
+	<th>
+		<br>
+		<span id='showFileloaded'>keine Datei geladen</span>
 	</th>
 </tr>
 </table>
@@ -490,6 +497,7 @@ window.onload = async function(){
 	canvas = document.getElementById('SimulationsCanvas');
 	canvasContext  = canvas.getContext('2d');
 	resultCan = document.getElementById('resultCanvas').getContext('2d')
+	iffileloaded = document.getElementById('showFileloaded')
 	toogleExpertMode()
 	getUploadFile()
 	var draw = setInterval(function(){
@@ -579,7 +587,9 @@ const StartSim = function() {
 
 	//check if file is inserted
 	if(uploadedDots == undefined){
-		//Init uninf Points
+		iffileloaded.textContent = 'keine Datei geladen'
+
+		//Init mew uninf Points
 		for(var i = 0; i < Livings - StartInfizerite; i++){
 			x = Math.random() * canvas.width
 			y = Math.random() * canvas.height
@@ -588,7 +598,7 @@ const StartSim = function() {
 			mfn = getRndFloat(MinMindfulness, MaxMindfulness)
 			Dots.splice(i, 0, new Dot(x,y, ColorClean, f, x,y, im, mfn))
 		}
-		//Init inf Points
+		//Init new inf Points
 		for(var i = 0; i < StartInfizerite; i++){
 			x = Math.random() * canvas.width
 			y = Math.random() * canvas.height
@@ -599,6 +609,7 @@ const StartSim = function() {
 		}
 	} else if(typeof uploadedDots == typeof null){ //if file is inserted load Dots from file
 		for(dot in uploadedDots){
+			//push Dots from loaded file into Dots list for Sim \  init old Dots
 			Dots.splice(i, 0, new Dot(uploadedDots[dot].lx,uploadedDots[dot].ly, uploadedDots[dot].color,uploadedDots[dot].startfood, uploadedDots[dot].lx,uploadedDots[dot].ly, uploadedDots[dot].immunsys, uploadedDots[dot].mindfulness))
 
 		}
@@ -974,9 +985,9 @@ function getUploadFile(){
 		const reader = new FileReader();
           reader.addEventListener('load', event => {
             uploadedDots = event.target.result;
-            uploadedDots = uploadedDots.replace('[object Object]','')
             uploadedDots = JSON.parse(uploadedDots)
             console.log(uploadedDots)
+            iffileloaded.textContent = data.name + ' geladen'
 
           });
           reader.readAsText(data);
