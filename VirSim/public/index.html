@@ -211,12 +211,13 @@
 </tr>
 <tr>
 	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2'>Infektionswahrscheinlichkeit: </span>
+		Infektionswahrscheinlichkeit:
 	</th>
-	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" > <input type="number" id="InfProb" min='0' value="2">
+	<th title="Hier kannst du die Infektionswahrscheinlichkeit nach Kontakten einstellen. 1 zu x (deinem Wert), Standard = 2" > 
+		<input type="number" id="InfProb" min='0' value="2">
 	</th>
 	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2" >
-		<span class="tooltip" data-tooltip= 'Hier kannst du das minimale Essen, welches die Lebewesen haben können, einstellen. Standard = 2'>minimales Essen:</span>
+		minimales Essen:
 	</th>
 	<th title="Hier kannst du den minimalen Lebensmittelvorrat eines Lebewesens eingeben. Wenn dieser erreicht ist, muss es wieder zum Supermarkt gehen. Standard = 2">
 		<input type="number" id="MinFood" min='0' value="2">
@@ -234,6 +235,11 @@
 	</th>
 	<th title="Hier kannst du einstellen, ob das Programm live einen Graphen zeichnen soll. Kann Performance kosten. Standard = Off"> 
 		<input type="checkbox" id="liveGrph" min='0' value="false">
+	</th>
+</tr>
+<tr>
+	<th>
+		<input type="file" class="InputTable" id="uploadDots" accept='.vrsm'>
 	</th>
 </tr>
 </table>
@@ -260,7 +266,7 @@
 <br>
 <form>
 	<div id='saveSimDiv'>
-		<input type="button" value="Download starten" onclick="OnDownloadFile()" id='saveSim'>
+		<input type="button" value="Punkte speichern" onclick="downloadDots(Dots)" id='saveSim'>
     </div>
 </form>
 <div id=repz class='text'>
@@ -403,6 +409,9 @@ var wereRestrictions = false
 var InDic = Math.sqrt(socialDistance**2+socialDistance**2)
 var resultCan = document.getElementById('resultCanvas').getContext('2d')
 
+//mange var for uploaded file
+var uploadedDots;
+
 
 //Chart
 Chart.defaults.global.defaultFontColor = "black";
@@ -482,6 +491,7 @@ window.onload = async function(){
 	canvasContext  = canvas.getContext('2d');
 	resultCan = document.getElementById('resultCanvas').getContext('2d')
 	toogleExpertMode()
+	getUploadFile()
 	var draw = setInterval(function(){
 		if (!inSimulation){
 		colorRect(0,0,canvas.width,canvas.height,'black')
@@ -492,6 +502,7 @@ window.onload = async function(){
 }
 const StartSim = function() {
 	if(!inSimulation){
+
 	inSimulation = true;
 
 	//Object lists
@@ -547,7 +558,6 @@ const StartSim = function() {
 
 	//Reset Lists
 	Times = [0];
-	console.log(Times)
 	Infektions = [redCount];
 	Recovres = [];
 	markets = [];
@@ -565,26 +575,35 @@ const StartSim = function() {
 		createChart()
 		createchar = false;
 	}
-	//Init uninf Points
-	for(var i = 0; i < Livings - StartInfizerite; i++){
-		x = Math.random() * canvas.width
-		y = Math.random() * canvas.height
-		f = Math.random() * MaxFood
-		im = getRndFloat(ImmunsystemMin,ImmunsystemMax) // Immunsystem vom Benutzer einstellbar machen!!!
-		mfn = getRndFloat(MinMindfulness, MaxMindfulness)
-		console.log(im)
-		Dots.splice(i, 0, new Dot(x,y, ColorClean, f, x,y, im, mfn))
+
+
+	//check if file is inserted
+	if(uploadedDots == undefined){
+		//Init uninf Points
+		for(var i = 0; i < Livings - StartInfizerite; i++){
+			x = Math.random() * canvas.width
+			y = Math.random() * canvas.height
+			f = Math.random() * MaxFood
+			im = getRndFloat(ImmunsystemMin,ImmunsystemMax) // Immunsystem vom Benutzer einstellbar machen!!!
+			mfn = getRndFloat(MinMindfulness, MaxMindfulness)
+			Dots.splice(i, 0, new Dot(x,y, ColorClean, f, x,y, im, mfn))
+		}
+		//Init inf Points
+		for(var i = 0; i < StartInfizerite; i++){
+			x = Math.random() * canvas.width
+			y = Math.random() * canvas.height
+			f = Math.random() * MaxFood
+			im = getRndFloat(ImmunsystemMin,ImmunsystemMax) 
+			mfn = getRndFloat(MinMindfulness, MaxMindfulness)
+			Dots.splice(i, 0, new Dot(x,y, ColorInfektions, f, x,y, im, mfn))
+		}
+	} else if(typeof uploadedDots == typeof null){ //if file is inserted load Dots from file
+		for(dot in uploadedDots){
+			Dots.splice(i, 0, new Dot(uploadedDots[dot].lx,uploadedDots[dot].ly, uploadedDots[dot].color,uploadedDots[dot].startfood, uploadedDots[dot].lx,uploadedDots[dot].ly, uploadedDots[dot].immunsys, uploadedDots[dot].mindfulness))
+
+		}
 	}
-	//Init inf Points
-	for(var i = 0; i < StartInfizerite; i++){
-		x = Math.random() * canvas.width
-		y = Math.random() * canvas.height
-		f = Math.random() * MaxFood
-		im = getRndFloat(ImmunsystemMin,ImmunsystemMax) 
-		mfn = getRndFloat(MinMindfulness, MaxMindfulness)
-		console.log(im)
-		Dots.splice(i, 0, new Dot(x,y, ColorInfektions, f, x,y, im, mfn))
-	}
+	
 	//Init Marketplace
 	if (MarketYN){
 		Markets.push(new Market(canvas.width/2, canvas.height/2))
@@ -769,7 +788,7 @@ async function sendData(datas) {
 	} 
 	const response = await fetch('/api', options)
 	const json = await response.json();
-	console.log(json);
+	//console.log(json);
 	}
 //end Simulation
 function cancelSim(){
@@ -891,6 +910,84 @@ function colorCircle(x,y,r,color){
 	canvasContext.arc(x,y,r,0, Math.PI*2,true);
 	canvasContext.fill()
 }
+//download a file (totally my code)
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,'  +encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+//gets timestamp
+function get_now(){
+        var today = new Date();
+
+        var day = today.getDate();
+
+        var month = today.getMonth()+1;
+
+        var year = today.getFullYear();
+
+        a = new Date();
+ 		
+ 		b = a.getHours(); c = a.getMinutes();
+ 		
+ 		if(b < 10){b = '0'+b;}
+
+ 		if(c < 10){c = '0'+c;}
+
+ 		time = b+'/'+c;
+
+        if(day < 10) {
+                day = '0'+ day;
+        } 
+        if(month < 10) {
+                month = '0'+ month;
+        } 
+        today = day + '.' + month + '.' + year + '_' + time;
+
+        return today;
+}
+//formats and donwloads Object of dots
+function downloadDots(Dots){
+	let dicDots = new Object()
+	for( dot in Dots){
+		var dotz = new Object(JSON.stringify(Dots[dot]))
+		dicDots += dotz
+	}
+	dicDots = dicDots.replace('[object Object]','[')
+	for(i in Dots){
+	dicDots = dicDots.replace('}{','},{')
+	}
+	dicDots = dicDots.concat(']')
+	download(get_now() + '.vrsm', dicDots)
+}
+
+function getUploadFile(){
+	const uploadFile = document.getElementById('uploadDots').addEventListener('change', (event) => {
+		const data = event.target.files[0];
+		const reader = new FileReader();
+          reader.addEventListener('load', event => {
+            uploadedDots = event.target.result;
+            uploadedDots = uploadedDots.replace('[object Object]','')
+            uploadedDots = JSON.parse(uploadedDots)
+            console.log(uploadedDots)
+
+          });
+          reader.readAsText(data);
+
+	});
+
+	
+
+	
+}
+
 // class of one dot/living in the sim
 class Dot {
 	constructor(x,y, color,food, lx,ly, immunsys, mindfulness){
@@ -903,6 +1000,7 @@ class Dot {
 		this.color = color
 		this.it = 0
 		this.food = food
+		this.startfood = food
 		this.immunsys = immunsys
 		this.mindfulness = mindfulness
 		this.reproduktion = 0;
