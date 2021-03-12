@@ -2,7 +2,7 @@
 
 Welcome on my GitHub,
 
-because this is my first was lolRepository, it may be a bit chaotic. 
+because this is my first Repository, it may be a bit chaotic. 
 Therefore my code will be found in the 'master' branch. 
 
 This is made as a part of a school project and the competition 'Jugend forscht'. 
