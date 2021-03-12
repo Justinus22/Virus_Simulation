@@ -968,6 +968,9 @@ function get_now(){
 }
 //formats and donwloads Object of dots
 function downloadDots(Dots){
+	if(uploadedDots == undefined){
+		alert('Bitte starte zuerst eine Simulation, um die Punkte aus dieser zu Speichern')
+	}
 	let dicDots = new Object()
 	for( dot in Dots){
 		var dotz = new Object(JSON.stringify(Dots[dot]))
