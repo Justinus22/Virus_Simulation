@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All Data</title>
+	<link rel="stylesheet" type="text/css" href="styledatabase.css">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="id=edge">
+</head>
+<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
+<body>
+	
+	
+    <table>
+        <tr>
+            <th>
+                <h1>All Data</h1>
+            </th>
+            <th>
+                <a href="index.html" class="back">zurück</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+            <p>Anzahl der angezeigten Simulationen:</p>
+            </th>
+            <th>
+            <form>
+                <input type="number" id="displaycount" value="10"><br>      
+
+            </form>        
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input type="button" value="Anwenden" onclick='reset();'>
+            </th>
+        </tr>
+    </table>
+    <br>
+    <div id='root'></div>
+
+		<script type="text/javascript">
+
+            const indatacount = document.getElementById('displaycount')
+			var ColorInfektions = '#ff0000';
+			var ColorClean = '#ffffff';
+			var ColorDeath = '#00a621';
+			var ColoRecovers = '#2b44ff';
+			var ColorUnSeeInf = '#fce803';
+
+             // const root = document.createElement('div');
+
+             const root = document.getElementById('root')
+             root.innerHTML = "";
+
+			var data = getData();
+            console.log(data.value)
+
+			async function getData() {
+               
+				const response = await fetch('/api');
+				const data = await response.json();
+
+                
+                ind = indatacount.value;
+
+               if(ind > data.length){
+                    ind = data.length;
+                    indatacount.value = ind
+               }
+				for(var item = 0; item < ind; item ++){
+					
+					const dataViz = document.createElement("CANVAS");
+
+
+					const result = new Chart(dataViz, 
+				{
+// The type of chart we want to create
+type: 'line',
+
+// The data for our dataset
+    data: {
+        labels: data[item].times,
+        datasets: [{
+            label: 'Infektionen',
+            borderColor: ColorInfektions,
+            data: data[item].infektions,
+            pointRadius: 0,
+            pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'Wieder Gesunde',
+            borderColor: ColoRecovers,
+        	data: data[item].recovres,
+        	pointRadius: 0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        	}, {
+        	label: 'Tote',
+        	borderColor: ColorDeath,
+        	data: data[item].deaths,
+        	pointRadius: 0,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }, {
+        	label: 'ungesehene Infektionen',
+        	borderColor: ColorUnSeeInf,
+        	data: data[item].unseinfs,
+        	pointRadius: 0 ,
+        	pointBackgroundColor: 'rgb(0,0,0)'
+        }]
+    },
+
+// Configuration options go here
+options: {
+
+	elements: {
+        line: {
+            tension: 0 // disables bezier curves
+        },
+        points: {
+        	radius: 0
+        }},
+    	events: [],
+    	bezierCurve : true
+}
+});
+					root.append(dataViz)
+					document.body.append(root)
+
+				}
+
+
+                return data.length
+
+			}
+            function cleared(){
+                root.innerHTML = "";
+            }
+            function reset(){
+                console.log(getData)
+                    if (indatacount.value > getData){
+                        alert('Angegebene Zahl zu groß')
+                        console.log('test')
+                        return
+                    }
+                    cleared()
+                    getData()
+                }
+		</script>
+	</body>
+</html>
