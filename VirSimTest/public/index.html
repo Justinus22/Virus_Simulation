@@ -412,10 +412,9 @@ var inSimulation = false;
 var createchar = false;
 var wereRestrictions = false
 
-
+var InDic;
 
 //Consts
-var InDic = Math.sqrt(socialDistance**2+socialDistance**2)
 var resultCan = document.getElementById('resultCanvas').getContext('2d')
 
 //mange var for uploaded file
@@ -554,6 +553,7 @@ const StartSim = function() {
 	ColoRecovers = InputColorRe.value;
 	ColorUnSeeInf = InputColorUSF.value;
 
+	InDic = socialDistance;
 
 	//Reset Data
 	redCount = StartInfizerite;
@@ -634,6 +634,7 @@ const StartSim = function() {
 
 			//Update Position and Status of all points
 	 		for(var d in Dots){
+
 				// Handel Food count
 	 			if(MarketYN){Dots[d].food -= 1;}
 				
@@ -641,34 +642,36 @@ const StartSim = function() {
 	 			Dots[d].pick_Dir()
 	 			Dots[d].InfTime()
 	 			Dots[d].MarketCheck()
-	 			
+
+	 			var dotUpdater = Dots[d].color;
+
 				//Compare points with each other
 				for(var dot = d;dot < Dots.length; dot++){
 					//console.log(d,dot)dd
 					//calculate Distance between points
-					var a = Dots[dot].x - Dots[d].x;
-					var b = Dots[dot].y - Dots[d].y;
+					var a = Dots[d].x - Dots[dot].x;
+					var b = Dots[d].y - Dots[dot].y;
 					var c = Math.sqrt(a**2 + b**2);
-					console.log(d,dot)
+					
 					//Check if Points are too close to each other
 					if (c < InDic){
 						line(Dots[d].x,Dots[d].y,Dots[dot].x,Dots[dot].y)
-						var r = 0//getRndInteger(0,InfProb)
+						var r = getRndInteger(0,InfProb)
 						//check if infection can be done
-						if((Dots[d].color == ColorInfektions || Dots[d].color == ColorUnSeeInf) && r == 0 && Dots[dot].color == ColorClean && Dots[dot].immunsys <= discoverInf) {
+						if((Dots[d].color == ColorInfektions || Dots[d].color == ColorUnSeeInf) && Dots[dot].color == ColorClean) { // && r == 0  && Dots[d].immunsys <= discoverInf
 							//infect Point
 							Dots[dot].color = ColorInfektions;
 							//update Infections Count
 							redCount++;
 							onenewinfected = true;
-							Dots[d].reproduktion += 1;
-						}else if ((Dots[d].color == ColorInfektions || Dots[d].color == ColorUnSeeInf) && r == 0 && Dots[dot].color == ColorClean && Dots[dot].immunsys > discoverInf){ 
+							Dots[dot].reproduktion += 1;
+						}else if ((Dots[dot].col7or == ColorInfektions || Dots[dot].color == ColorUnSeeInf) && r == 0 && Dots[d].color == ColorClean && Dots[d].immunsys > discoverInf){ 
 							// infect Point 
 							Dots[dot].color = ColorUnSeeInf;
 							//update Infection Count
 							usf++;
 							onenewinfected = true;
-							Dots[d].reproduktion += 1;
+							Dots[dot].reproduktion += 1;
 						}
 					}
 					//Handel Lockdown/ Special alarm Situation 
@@ -686,9 +689,17 @@ const StartSim = function() {
 					}
 
 				}
-				//update Dots position on Screen
+
+
+
 				Dots[d].draw()
 
+
+				
+			}
+			//update Dots position on Screen
+			for(var d in Dots){
+				
 			}
 
 			//console.log(allnewInfektionsday, redCount)
@@ -904,6 +915,7 @@ function line(x1,y1,x2,y2){
 	canvasContext.moveTo(x1, y1);
 	canvasContext.lineTo(x2, y1);
 	canvasContext.stroke();
+
 }
 // gets a Random whole Int between min and max
 function getRndInteger(min, max) {
@@ -1038,8 +1050,7 @@ class Dot {
 			this.y_vel = 0;
 		} 
 
-		
-		colorCircle(this.x,this.y,3,this.color)	
+		colorCircle(this.x,this.y,3,this.color)
 
 	}
 
