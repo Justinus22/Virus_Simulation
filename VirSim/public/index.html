@@ -968,9 +968,10 @@ function get_now(){
 }
 //formats and donwloads Object of dots
 function downloadDots(Dots){
-	if(uploadedDots == undefined){
-		alert('Bitte starte zuerst eine Simulation, um die Punkte aus dieser zu Speichern')
-	}
+	console.log(uploadedDots, Dots.length)
+	if(Dots.length != 0){
+		
+	
 	let dicDots = new Object()
 	for( dot in Dots){
 		var dotz = new Object(JSON.stringify(Dots[dot]))
@@ -982,6 +983,10 @@ function downloadDots(Dots){
 	}
 	dicDots = dicDots.concat(']')
 	download(get_now() + '.vrsm', dicDots)
+
+	} else if (Dots.length == 0){
+	alert('Bitte starte zuerst eine Simulation, um die Punkte aus dieser zu Speichern')
+	}
 }
 
 function getUploadFile(){
